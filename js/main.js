@@ -21,14 +21,17 @@ var gGame = {
 
 
 
-gBoard = buildBoard()
-renderBoard(gBoard)
-setMinesNegsCount(gBoard)
+// gBoard = buildBoard()
+// renderBoard(gBoard)
 
 
 
 
 function onInit() {
+    gBoard = buildBoard()
+    renderBoard(gBoard)
+    setMinesNegsCount(gBoard)
+
 
 
 }
@@ -73,14 +76,10 @@ function renderBoard(board) {
     for (var i = 0; i < board.length; i++) {
         strHTML += '<tr>\n'
         for (var j = 0; j < board[0].length; j++) {
-            var currCell = board[i][j]
-            const className = `cell-${i}-${j}`
-            strHTML += `<td onclick="onCellClicked(this, ${i}, ${j})" class="${className}">`
-
-            if (currCell.isMine) {
-                //strHTML += MINE
-            }
-
+            //var currCell = board[i][j]
+            const className = `cell cell-${i}-${j}`
+            strHTML += `<td onclick="onCellClicked(this, ${i}, ${j})" class="${className}"
+             oncontextmenu="onCellMarked(this, ${i}, ${j}); return false">`
             strHTML += '</td>'
         }
         strHTML += '</tr>\n'
@@ -91,8 +90,8 @@ function renderBoard(board) {
 
 function onCellClicked(elCell, i, j) {
     var value
+    elCell.classList.add('empty-cell')
     if (gBoard[i][j].minesAroundCount === 0) {
-        elCell.classList.add('empty-cell')
         gBoard[i][j].isShown = true
         expandShown(gBoard, elCell, i, j) //TODO class of empty, open negs cells
         return
@@ -103,13 +102,17 @@ function onCellClicked(elCell, i, j) {
         gBoard[i][j].isShown = true
     }
 
-
     elCell = document.querySelector(`.cell-${i}-${j}`)
     elCell.innerHTML = value
 }
 
-function onCellMarked(elCell) {
+function onCellMarked(elCell, i, j) { //TODO  ISMARKED
+    var value = gBoard[i][j].isMarked ? '' : FLAG
+    gBoard[i][j].isMarked = !gBoard[i][j].isMarked
 
+
+    elCell = document.querySelector(`.cell-${i}-${j}`)
+    elCell.innerHTML = value
 }
 
 function checkGameOver() {
@@ -128,16 +131,46 @@ function expandShown(board, elCell, rowIdx, colIdx) {
             value = board[i][j].minesAroundCount
             elCell = document.querySelector(`.cell-${i}-${j}`)
 
+
             if (value === 0) {
                 if (gBoard[i][j].isShown) continue
                 elCell.classList.add('empty-cell')
+                gBoard[i][j].isShown = true
                 expandShown(board, elCell, i, j)
-            } else elCell.innerHTML = value
+            } else {
+                elCell.innerHTML = value
+                gBoard[i][j].isShown = true
+                elCell.classList.add('empty-cell')
+            }
+
         }
     }
 }
 
-// function renderCell(location, value) {
+function setBeginnerLevel() {
+    gLevel = {
+        SIZE: 4,
+        MINES: 2
+    }
+    onInit()
+}
+
+function setMediumLevel() {
+    gLevel = {
+        SIZE: 8,
+        MINES: 14
+    }
+    onInit()
+}
+
+function setExpertLevel() {
+    gLevel = {
+        SIZE: 12,
+        MINES: 32
+    }
+    onInit()
+}
+// function renderCell(location, value) {   //  REUSE CODE
 //     const elCell = document.querySelector(`.cell-${location.i}-${location.j}`)
 //     elCell.innerHTML = value
 // }

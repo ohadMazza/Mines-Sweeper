@@ -1,23 +1,33 @@
-table,
-td {
-    border: 1px solid black;
+table {
+    display: inline-block;
+    border: 1px solid #000;
     border-collapse: collapse;
+
+
+
 }
 
-.board td {
-    width: 30px;
-    height: 30px;
-    text-align: center;
-    padding: 10px;
-}
 
 .cell {
-    width: 40px;
-    height: 40px;
+    box-sizing: border-box;
+    border: 8px outset #ececec;
+    background: #c0c0c0;
+    width: 60px;
+    height: 60px;
     text-align: center;
-    font-size: 1.5em;
+    vertical-align: middle;
+
+    cursor: pointer;
 }
 
 .empty-cell {
-    background-color: rgb(222, 196, 196);
+    /* background-color: rgb(145, 145, 145); */
+    border: 2px solid rgb(121, 116, 116);
+    font-family: "Press Start";
+    background-color: #d5d2d2;
+    font-size: 80%;
+    text-align: center;
+    font-size: 35px;
+    font-weight: bold;
+
 }
