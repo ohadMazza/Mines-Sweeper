@@ -27,26 +27,46 @@ function buildBoard() {
     return board
 }
 
+// function startTimer() {
+//     var startTime = new Date().getTime();
+//     var gTimer = setInterval(() => {
+
+//         var runningClock = document.querySelector('h2')
+//         runningClock.innerText = timeString
+
+//         var elapsedTime = new Date().getTime() - startTime - 1;
+//         var minutes = Math.floor((elapsedTime % 3600000) / 60000);
+//         var seconds = Math.floor((elapsedTime % 60000) / 1000);
+
+//         var timeString = `${minutes}:${seconds.toString().padStart(2, "0")}`;
+//         var elTimer = document.querySelector('.timer')
+//         elTimer.innerHTML = timeString
+
+//     }, 1000);
+// }
+
+
 function startTimer() {
-    // var startTime = new Date().getTime();
-    // var gTimer = setInterval(() => {
-
-    //     var runningClock = document.querySelector('h2')
-    //     runningClock.innerText = timeString
-
-    //     var elapsedTime = new Date().getTime() - startTime - 1;
-    //     //time++;
-    //     // Format the time as minutes and seconds
-    //     var minutes = Math.floor((elapsedTime % 3600000) / 60000);
-    //     var seconds = Math.floor((elapsedTime % 60000) / 1000);
-    //     // const minutes = Math.floor(time / 60);
-    //     // const seconds = time % 60;
-    //     // Display the timer in the element
-    //     var timeString = `${minutes}:${seconds.toString().padStart(2, "0")}`;
-
-    // }, 1000);
+    gTimer = Date.now();
+    gTimerInterval = setInterval(updateTimer, 1000);
 }
 
+function stopTimer() {
+    clearInterval(gTimerInterval);
+}
+
+function updateTimer() {
+    var elapsedTime = Date.now() - gTimer;
+    var minutes = Math.floor(elapsedTime / (1000 * 60));
+    var seconds = Math.floor((elapsedTime % (1000 * 60)) / 1000);
+
+    var elTimer = document.querySelector('#timer')
+    elTimer.textContent = formatTime(minutes) + ':' + formatTime(seconds)
+}
+
+function formatTime(time) {
+    return (time < 10 ? '0' : '') + time;
+}
 
 
 

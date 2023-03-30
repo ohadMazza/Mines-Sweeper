@@ -8,20 +8,25 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body>
+<body onload="onInit()">
     <h1>Mine Sweeper</h1>
-    <h2></h2>
+    <div class="container">
+
+        <h3> LIVES: <span class="lives"></span></h3>
+        <div class="header">
+            <div id="timer">00:00</div>
+            <div onclick="onInit()" class="smiley">🙂</div>
+            <div class="mines-count">MINES:</div><span class="mines">00</span>
+        </div>
+        <table>
+            <tbody class="board"></tbody>
+        </table>
+        <h1 class="msg">GAME OVER, YOU <span></span></h1>
+    </div>
     <button onclick="setBeginnerLevel()">Beginner</button>
     <button onclick="setMediumLevel()">Medium</button>
     <button onclick="setExpertLevel()">Expert</button>
-    <table>
-        <tbody class="board"></tbody>
-    </table>
-
-    <h1></h1>
-
-
-
+    </div>
 
     <script src="js/main.js"></script>
     <script src="js/util.js"></script>
