@@ -1,8 +1,8 @@
 'use strict'
 
-document.addEventListener('contextmenu', e => {
-    e.preventDefault()
-})
+// document.addEventListener('contextmenu', e => {
+//     e.preventDefault()
+// })
 
 function buildBoard() {
 
@@ -23,23 +23,51 @@ function buildBoard() {
     // board[3][0].isMine = true
     // board[1][2].isMine = true
 
-    var locations = []
-    for (var i = 0; i < board.length; i++) {
-        for (var j = 0; j < board[0].length; j++) {
-            locations.push({ i, j })
-        }
-    }
 
-    for (var i = 0; i < gLevel.MINES; i++) {
-        var randIdx = getRandomIntInclusive(0, locations.length - 1)
-        var currLocation = locations[randIdx]
-        locations.splice(randIdx, 1)
-        board[currLocation.i][currLocation.j].isMine = true
-    }
     return board
 }
+
+function startTimer() {
+    // var startTime = new Date().getTime();
+    // var gTimer = setInterval(() => {
+
+    //     var runningClock = document.querySelector('h2')
+    //     runningClock.innerText = timeString
+
+    //     var elapsedTime = new Date().getTime() - startTime - 1;
+    //     //time++;
+    //     // Format the time as minutes and seconds
+    //     var minutes = Math.floor((elapsedTime % 3600000) / 60000);
+    //     var seconds = Math.floor((elapsedTime % 60000) / 1000);
+    //     // const minutes = Math.floor(time / 60);
+    //     // const seconds = time % 60;
+    //     // Display the timer in the element
+    //     var timeString = `${minutes}:${seconds.toString().padStart(2, "0")}`;
+
+    // }, 1000);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function getRandomIntInclusive(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min
 }
+
+
 
