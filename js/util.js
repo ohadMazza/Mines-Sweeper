@@ -1,8 +1,5 @@
 'use strict'
 
-// document.addEventListener('contextmenu', e => {
-//     e.preventDefault()
-// })
 
 function buildBoard() {
 
@@ -19,32 +16,8 @@ function buildBoard() {
         }
     }
 
-    // board[0][1].isMine = true
-    // board[3][0].isMine = true
-    // board[1][2].isMine = true
-
-
     return board
 }
-
-// function startTimer() {
-//     var startTime = new Date().getTime();
-//     var gTimer = setInterval(() => {
-
-//         var runningClock = document.querySelector('h2')
-//         runningClock.innerText = timeString
-
-//         var elapsedTime = new Date().getTime() - startTime - 1;
-//         var minutes = Math.floor((elapsedTime % 3600000) / 60000);
-//         var seconds = Math.floor((elapsedTime % 60000) / 1000);
-
-//         var timeString = `${minutes}:${seconds.toString().padStart(2, "0")}`;
-//         var elTimer = document.querySelector('.timer')
-//         elTimer.innerHTML = timeString
-
-//     }, 1000);
-// }
-
 
 function startTimer() {
     gTimer = Date.now();
@@ -66,6 +39,34 @@ function updateTimer() {
 
 function formatTime(time) {
     return (time < 10 ? '0' : '') + time;
+}
+
+function colorsNums(elCell, value) {
+    switch (value) {
+        case 1:
+            elCell.style.color = 'blue'
+            break;
+        case 2:
+            elCell.style.color = 'green'
+            break;
+        case 3:
+            elCell.style.color = 'red'
+            break;
+        case 4:
+            elCell.style.color = 'purple'
+
+            break;
+        case 5:
+            elCell.style.color = 'maroon'
+
+            break;
+        case 6:
+            elCell.style.color = 'blue'
+
+            break;
+        default:
+            elCell.style.color = 'sturquoise'
+    }
 }
 
 

@@ -25,16 +25,6 @@ var gGame = {
     secsPassed: 0
 }
 
-
-
-
-
-// gBoard = buildBoard()
-// renderBoard(gBoard)
-
-
-
-
 function onInit() {
     gLives = 3
 
@@ -58,11 +48,6 @@ function setMinesNegsCount(board) {
             if (board[i][j].isMine) continue
             var negsCount = minesNegsCountInCell(i, j, board)
             board[i][j].minesAroundCount = negsCount
-
-            // if (negsCount !== 0) {
-            //     const elCell = document.querySelector(`.cell-${i}-${j}`)
-            //     elCell.innerHTML = negsCount
-            // }
         }
     }
 }
@@ -77,7 +62,6 @@ function minesNegsCountInCell(rowIdx, colIdx, board) {
             if (j < 0 || j >= board.length) continue
             if (i === rowIdx && j === colIdx) continue
             if (board[i][j].isMine) negsCount++
-
         }
     }
     return negsCount
@@ -90,7 +74,6 @@ function renderBoard(board) {
     for (var i = 0; i < board.length; i++) {
         strHTML += '<tr>\n'
         for (var j = 0; j < board[0].length; j++) {
-            //var currCell = board[i][j]
             const className = `cell cell-${i}-${j}`
             strHTML += `<td onclick="onCellClicked(this, ${i}, ${j})" class="${className}"
              oncontextmenu="onCellMarked(this, ${i}, ${j}); return false">`
@@ -109,8 +92,6 @@ function onCellClicked(elCell, i, j) {
         gIsFirstMove = false
         setMinesOnBoardByClick(i, j)
         setMinesNegsCount(gBoard)
-        console.table(gBoard)
-
     }
     if (gBoard[i][j].isShown) return
 
@@ -127,7 +108,6 @@ function onCellClicked(elCell, i, j) {
         clickOnMine(elCell, i, j)
         return
     }
-
     else {
         value = gBoard[i][j].minesAroundCount
         gBoard[i][j].isShown = true
@@ -224,7 +204,6 @@ function checkGameOver() {
         elSpan.textContent = 'LOSE!'
 
         showBoard()
-
     }
 }
 
@@ -259,7 +238,6 @@ function expandShown(board, elCell, rowIdx, colIdx) {
 
             value = board[i][j].minesAroundCount
             elCell = document.querySelector(`.cell-${i}-${j}`)
-
 
             if (gBoard[i][j].isShown) continue
 
@@ -317,7 +295,6 @@ function initHeader() {
 
     var elMSsg = document.querySelector('.msg')
     elMSsg.style.display = 'none'
-
 }
 
 function updateMinesCountDown() {
@@ -325,43 +302,12 @@ function updateMinesCountDown() {
     gMinesCount--
     elSpan.innerHTML = gMinesCount
 }
+
 function updateMinesCountUp() {
     var elSpan = document.querySelector('.mines')
     gMinesCount++
     elSpan.innerHTML = gMinesCount
 }
 
-function colorsNums(elCell, value) {
-    switch (value) {
-        case 1:
-            elCell.style.color = 'blue'
-            break;
-        case 2:
-            elCell.style.color = 'green'
-            break;
-        case 3:
-            elCell.style.color = 'red'
-            break;
-        case 4:
-            elCell.style.color = 'purple'
 
-            break;
-        case 5:
-            elCell.style.color = 'maroon'
-
-            break;
-        case 6:
-            elCell.style.color = 'blue'
-
-            break;
-        default:
-            elCell.style.color = 'sturquoise'
-    }
-}
-
-
-// function renderCell(location, value) {   //  REUSE CODE
-//     const elCell = document.querySelector(`.cell-${location.i}-${location.j}`)
-//     elCell.innerHTML = value
-// }
 
